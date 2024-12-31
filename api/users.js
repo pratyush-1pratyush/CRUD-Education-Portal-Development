@@ -142,6 +142,32 @@ const data = {
         // Return the updated user or list of users
         return res.status(200).json({ message: "User updated successfully", user: data.users[userIndex] });
       }
+
+      if (req.method === 'POST') {
+        const { names, username, gender, emailId, contact, Images } = req.body;
+    
+        // Validate required fields
+        if (!names || !username || !emailId || !contact) {
+          return res.status(400).json({ message: "Missing required fields" });
+        }
+    
+        // Generate a new user ID (you can improve this part with unique ID generation logic)
+        const newUser = {
+          id: Math.random().toString(36).substring(7), // Random string as ID (example)
+          names,
+          username,
+          gender,
+          emailId,
+          contact,
+          Images,
+        };
+    
+        // Add the new user to the users array
+        data.users.push(newUser);
+    
+        // Return the newly created user
+        return res.status(201).json({ message: "User created successfully", user: newUser });
+      }
     
   
     // Return the data

@@ -1,5 +1,6 @@
 import axios from 'axios';
  import React, { useState } from 'react'
+import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
  
 
@@ -23,12 +24,28 @@ const CreateStudents = () => {
     setUserDetails({ ...userDetails, [name]: value })
   };
   console.log(userDetails);
-  let handleSubmit = (e) => {
+ /* let handleSubmit = (e) => {
     e.preventDefault();
     axios.post("https://crud-education-portal-development-nine.vercel.app/api/users", userDetails)
     navigate("/home/allStudent")
-  }
+  }*/
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
+    // Send a POST request to create a new user
+    axios.post('https://crud-education-portal-development-nine.vercel.app/api/users', userDetails)
+      .then(response => {
+        // Handle successful user creation
+        console.log(response.data);
+        toast.success("User created successfully");
+        navigate("/home/allStudent");  // Redirect to the all students page
+      })
+      .catch(error => {
+        // Handle error
+        console.error("Error creating user:", error);
+        toast.error("Error creating user");
+      });
+  };
   return (
     <section className='createStudent'>
       <div className='jhgfdre '> 
