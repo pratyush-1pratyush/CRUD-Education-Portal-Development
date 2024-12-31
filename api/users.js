@@ -102,6 +102,25 @@ const data = {
     if (req.method === 'OPTIONS') {
       return res.status(200).end();
     }
+
+    if (req.method === 'DELETE') {
+        const { id } = req.query;  // Get the user ID from the query parameters
+        if (!id) {
+          return res.status(400).json({ message: "ID is required" });
+        }
+    
+        // Find the user and remove it
+        const userIndex = data.users.findIndex(user => user.id === id);
+        if (userIndex === -1) {
+          return res.status(404).json({ message: "User not found" });
+        }
+    
+        // Remove the user from the array
+        data.users.splice(userIndex, 1);
+    
+        // Return the updated list of users
+        return res.status(200).json({ message: "User deleted successfully", users: data.users });
+      }
   
     // Return the data
     res.status(200).json(data);
