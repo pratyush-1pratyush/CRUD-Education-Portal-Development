@@ -8,7 +8,7 @@ const ContextApi = ({ children }) => {
   let [viewMore, setViewMore] = useState(false)
   let fetchCredentials = async () => {
     let { data } = await axios.get("https://crud-education-portal-development.vercel.app/api/users")
-    console.log(data,"userDataCred")
+    console.log(data,"data")
     setUserLogin(data.credentials);
   };
   let validUser = (userData) => {
