@@ -19,11 +19,27 @@ const AllStudent = () => {
     let { data } = await axios.get("https://crud-education-portal-development-nine.vercel.app/api/users")
     setUsers(data?.users);
   }
-  let deleteUser = (id) => {
+  /*let deleteUser = (id) => {
     axios.delete(`https://crud-education-portal-development-nine.vercel.app/api/users/${id}`);
     setDeleteCount(deleteCount + 1)
     console.log(deleteCount)
     toast.success(`${id} is delete`)
+  }*/
+
+  const deleteUser = (id) => {
+    // Make the DELETE request to the serverless API
+    axios.delete(`https://crud-education-portal-development-nine.vercel.app/api/users?id=${id}`)
+      .then(response => {
+        // Handle the success response
+        setDeleteCount(deleteCount + 1);  // Update the deletion count
+        console.log(deleteCount);  // Optional: log for debugging
+        toast.success(`${id} is deleted`);  // Show success message
+      })
+      .catch(error => {
+        // Handle the error response
+        console.error("There was an error deleting the user:", error);
+        toast.error("Error deleting user");
+      });
   }
   useEffect(() => {
     fetchUsers();
