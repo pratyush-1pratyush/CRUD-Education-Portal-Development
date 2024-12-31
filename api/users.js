@@ -93,16 +93,6 @@ const data = {
   };
   
   export default function handler(req, res) {
-    // Set CORS headers to allow cross-origin requests
-    res.setHeader('Access-Control-Allow-Origin', '*');  // Allow all origins or specify your frontend URL (e.g., 'https://crud-education-portal-development-nine.vercel.app')
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  
-    // Handle preflight requests
-    if (req.method === 'OPTIONS') {
-      return res.status(200).end();
-    }
-  
-    // Return the data
-    res.status(200).json(data);
+    res.status(200).json(data);  // Return the credentials and users data
   }
+  
