@@ -121,6 +121,28 @@ const data = {
         // Return the updated list of users
         return res.status(200).json({ message: "User deleted successfully", users: data.users });
       }
+
+      if (req.method === 'PUT') {
+        const { id } = req.query;  // Get the user ID from the query parameters
+        const { names, username, gender, emailId, contact, Images } = req.body;  // Get the updated user details from the body
+    
+        if (!id) {
+          return res.status(400).json({ message: "ID is required" });
+        }
+    
+        // Find the user and update their details
+        const userIndex = data.users.findIndex(user => user.id === id);
+        if (userIndex === -1) {
+          return res.status(404).json({ message: "User not found" });
+        }
+    
+        // Update the user details
+        data.users[userIndex] = { ...data.users[userIndex], names, username, gender, emailId, contact, Images };
+    
+        // Return the updated user or list of users
+        return res.status(200).json({ message: "User updated successfully", user: data.users[userIndex] });
+      }
+    
   
     // Return the data
     res.status(200).json(data);

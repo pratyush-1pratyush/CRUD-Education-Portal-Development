@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react'
+import toast from 'react-hot-toast';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const UpdateStudent = () => {
@@ -24,12 +25,28 @@ const UpdateStudent = () => {
     setUserDetails({ ...userDetails, [name]: value })
   };
   console.log(userDetails);
-  let handleSubmit = (e) => {
+  /*let handleSubmit = (e) => {
     e.preventDefault();
     axios.put(`https://crud-education-portal-development-nine.vercel.app/api/users/${state.id}`, userDetails)
     navigate("/home/allStudent")
-  }
+  }*/
+  let handleSubmit = (e) => {
+    e.preventDefault();
 
+    // Send a PUT request to update the user details
+    axios.put(`https://crud-education-portal-development-nine.vercel.app/api/users?id=${state.id}`, userDetails)
+      .then(response => {
+        // Handle successful update
+        console.log(response.data);
+        toast.success(`User ${state.id} updated successfully`);
+        navigate("/home/allStudent");  // Redirect to the all students page
+      })
+      .catch(error => {
+        // Handle error
+        console.error("Error updating user:", error);
+        toast.error("Error updating user");
+      });
+  };
   return (
     <section className='createStudent'>
       <div className='jhgfdre '> 
