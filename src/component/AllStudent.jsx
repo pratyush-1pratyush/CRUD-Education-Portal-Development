@@ -16,11 +16,11 @@ const AllStudent = () => {
 
 
   let fetchUsers = async () => {
-    let { data } = await axios.get("http://localhost:4500/users")
-    setUsers(data);
+    let { data } = await axios.get("https://crud-education-portal-development-nine.vercel.app/api/users")
+    setUsers(data?.users);
   }
   let deleteUser = (id) => {
-    axios.delete(`http://localhost:4500/users/${id}`);
+    axios.delete(`https://crud-education-portal-development-nine.vercel.app/api/users/${id}`);
     setDeleteCount(deleteCount + 1)
     console.log(deleteCount)
     toast.success(`${id} is delete`)

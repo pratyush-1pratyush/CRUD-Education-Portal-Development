@@ -25,7 +25,7 @@ const CreateStudents = () => {
   console.log(userDetails);
   let handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:4500/users", userDetails)
+    axios.post("https://crud-education-portal-development-nine.vercel.app/api/users", userDetails)
     navigate("/home/allStudent")
   }
 

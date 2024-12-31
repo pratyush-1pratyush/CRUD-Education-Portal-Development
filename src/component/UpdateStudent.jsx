@@ -26,7 +26,7 @@ const UpdateStudent = () => {
   console.log(userDetails);
   let handleSubmit = (e) => {
     e.preventDefault();
-    axios.put(`http://localhost:4500/users/${state.id}`, userDetails)
+    axios.put(`https://crud-education-portal-development-nine.vercel.app/api/users/${state.id}`, userDetails)
     navigate("/home/allStudent")
   }
 
